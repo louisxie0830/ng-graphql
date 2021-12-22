@@ -1,37 +1,47 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-// import { environment } from '@environments/environment';
+import { HttpClientModule } from '@angular/common/http';
+
 
 // apollo
-// import { APOLLO_OPTIONS } from 'apollo-angular';
-// import { HttpLink } from 'apollo-angular/http';
-// import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
+import { APOLLO_OPTIONS } from 'apollo-angular';
+import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
+import { HttpLink } from 'apollo-angular/http';
+import { environment } from '@environments/environment';
 
-
-
-// export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
-//   return {
-//     cache: new InMemoryCache(),
-//     link: httpLink.create({
-//       uri: environment.uri,
-//     })
-//   }
-// }
+export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
+  return {
+    link: httpLink.create({ uri: environment.graphqlHost }),
+    cache: new InMemoryCache(),
+    defaultOptions: {
+      watchQuery: {
+        errorPolicy: 'all'
+      },
+      query: {
+        errorPolicy: 'all'
+      },
+      mutate: {
+        errorPolicy: 'all'
+      }
+    }
+  };
+}
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    // HttpClientModule,
+    HttpClientModule,
     FormsModule
   ],
-  // providers: [{
-  //   provide: APOLLO_OPTIONS,
-  //   useFactory: createApollo,
-  //   deps: [HttpLink]
-  // }],
+  providers: [
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: createApollo,
+      deps: [HttpLink]
+    }
+  ],
   exports: [
     FormsModule
   ]
