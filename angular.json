@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "graphql": {
+    "ng-graphql": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -39,7 +39,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/graphql",
+            "outputPath": "dist/ng-graphql",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -91,10 +91,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "graphql:build:production"
+              "browserTarget": "ng-graphql:build:production"
             },
             "development": {
-              "browserTarget": "graphql:build:development"
+              "browserTarget": "ng-graphql:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -102,7 +102,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "graphql:build"
+            "browserTarget": "ng-graphql:build"
           }
         },
         "test": {
@@ -126,5 +126,5 @@
       }
     }
   },
-  "defaultProject": "graphql"
+  "defaultProject": "ng-graphql"
 }
