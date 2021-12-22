@@ -17,12 +17,32 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2017",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "module": "es2020",
     "lib": [
       "es2020",
       "dom",
       "esnext.asynciterable"
-    ]
+    ],
+    "paths": {
+      "@core/*": [
+        "src/app/core/*"
+      ],
+      "@environments/*": [
+        "src/environments/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+      "@features/*": [
+        "src/app/features/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ]
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
