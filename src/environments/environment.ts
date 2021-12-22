@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  graphqlHost: 'https://48p1r2roz4.sse.codesandbox.io'
+  graphqlHost: 'http://10.13.13.143:8080/graphql/'
 };
 
 /*

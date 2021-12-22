@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GraphqlService } from '@core/services/graphql.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ng-graphql';
+  constructor(private graphqlService: GraphqlService) {
+    this.graphqlService.getPostById(1).subscribe(res =>{
+      console.error('res: ', res);
+    })
+  }
 }
