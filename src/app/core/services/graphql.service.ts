@@ -12,7 +12,7 @@ export class GraphqlService {
   getPostById(id: number): Observable<any> {
     return this.apollo.watchQuery({
       query: gql`
-      {
+      query {
         getPostById(id:${id}) {
              postId
              title
