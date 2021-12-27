@@ -1,7 +1,7 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 // apollo
@@ -9,6 +9,7 @@ import { APOLLO_OPTIONS } from 'apollo-angular';
 import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
 import { environment } from '@environments/environment';
+import { HttpInterceptorsService } from './services/http-interceptors.service';
 
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   return {
@@ -36,6 +37,11 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
     FormsModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorsService,
+      multi: true,
+    },
     {
       provide: APOLLO_OPTIONS,
       useFactory: createApollo,
