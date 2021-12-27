@@ -47,7 +47,7 @@ export class GraphqlService {
     }).valueChanges.pipe(map((result: any) => result.data));
   }
 
-  getUser(userId: 1) {
+  getUser(userId: number) {
     return this.apollo.watchQuery({
       query: gql`
       query {
@@ -55,9 +55,125 @@ export class GraphqlService {
           id,
           name,
           username,
-          email
+          email,
+          address {
+            street,
+            suite,
+            city,
+            zipcode,
+            geo {
+              lat,
+              lng
+            }
+          },
+          phone,
+          website,
+          company {
+            name,
+            catchPhrase,
+            bs
+          },
+          posts {
+            id,
+            title,
+            body,
+            author {
+              id,
+              name,
+              username,
+              email
+            }
+            comments {
+              id
+            }
+          }
         }
       }
+      `
+    }).valueChanges.pipe(map((result: any) => result.data));
+  }
+
+  getComments(pagination: { limit: number, page: number }) {
+    return this.apollo.watchQuery({
+      query: gql`
+        query {
+          comments(pagination: {limit: ${pagination.limit}, page: ${pagination.page}}) {
+            count,
+            currentPage,
+            totalPages,
+            data {
+              id,
+              body,
+              post {
+                id,
+                title,
+                body,
+                author {
+                  id,
+                  name,
+                  username,
+                  email,
+                  address {
+                    street,
+                    suite,
+                    city,
+                    zipcode,
+                    geo {
+                      lat,
+                      lng
+                    }
+                  },
+                  phone,
+                  website,
+                  company {
+                    name,
+                    catchPhrase,
+                    bs
+                  },
+                  posts {
+                    id,
+                    title,
+                    body,
+                    author {
+                      id,
+                      name,
+                      username,
+                      email,
+                      address {
+                        street,
+                        suite,
+                        city,
+                        zipcode,
+                        geo {
+                          lat,
+                          lng
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `
+    }).valueChanges.pipe(map((result: any) => result.data && result.data.comments));
+  }
+
+  getComment(commentId: number | string) {
+    return this.apollo.watchQuery({
+      query: gql`
+        query {
+          comment(commentId: ${commentId}) {
+            id,
+            body,
+            post {
+              id,
+              title,
+              body
+            }
+          }
+        }
       `
     }).valueChanges.pipe(map((result: any) => result.data));
   }

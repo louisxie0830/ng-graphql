@@ -1,0 +1,25 @@
+<div class="w-full px-4 md:px-0 md:mt-8 mb-16 text-gray-800 leading-normal">
+  <div
+    class="flex flex-wrap"
+    *ngIf="comments$ | async as comment; else loading"
+  >
+    <div class="w-full p-3">
+      <div
+        class="
+          border
+          rounded
+          shadow
+          p-2
+          mb-2
+          bg-from-indigo-600
+        "
+        *ngFor="let data of comment.data; index as i"
+      >
+        <span class="box-decoration-slice bg-gradient-to-r px-2">
+          {{ data.body }}
+        </span>
+      </div>
+    </div>
+  </div>
+  <ng-template #loading> Loading stuff... </ng-template>
+</div>
