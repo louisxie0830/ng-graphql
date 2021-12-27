@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  graphqlHost: 'http://10.13.13.143:8080/graphql/'
+  graphqlHost: 'https://api.graphqlplaceholder.com/graphql/'
 };
 
 /*

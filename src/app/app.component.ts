@@ -9,7 +9,10 @@ import { GraphqlService } from '@core/services/graphql.service';
 export class AppComponent {
   title = 'ng-graphql';
   constructor(private graphqlService: GraphqlService) {
-    this.graphqlService.getPostById(1).subscribe(res =>{
+    this.graphqlService.getUsers({limit: 10, page: 1}).subscribe(res =>{
+      console.error('res: ', res);
+    })
+    this.graphqlService.getUser(1).subscribe(res =>{
       console.error('res: ', res);
     })
   }
