@@ -7,10 +7,12 @@ import { GraphqlService } from '@core/services/graphql.service';
   styleUrls: ['./comments.component.scss']
 })
 export class CommentsComponent implements OnInit {
-  comments$ = this.graphqlService.getComments({limit: 800, page: 1})
+  comments$ = this.graphqlService.getComments({ limit: 800, page: 1 })
   constructor(private graphqlService: GraphqlService) { }
 
   ngOnInit(): void {
+    this.graphqlService.getPosts({ limit: 800, page: 1 }).subscribe(res => {
+      console.log('res: ', res);
+    })
   }
-
 }

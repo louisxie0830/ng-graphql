@@ -12,11 +12,11 @@
           p-2
           mb-2
           bg-from-indigo-600
+          bg-white
         "
         *ngFor="let data of comment.data; index as i"
       >
-        <span class="box-decoration-slice bg-gradient-to-r px-2">
-          {{ data.body }}
+        <span class="box-decoration-slice bg-gradient-to-r px-2" [innerText]="data.body">
         </span>
       </div>
     </div>

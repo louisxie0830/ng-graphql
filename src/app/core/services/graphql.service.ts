@@ -177,5 +177,39 @@ export class GraphqlService {
       `
     }).valueChanges.pipe(map((result: any) => result.data));
   }
+
+  getPost(postId: number) {
+    return this.apollo.watchQuery({
+      query: gql`
+        query {
+          post(postId: ${1}) {
+            id,
+            title,
+            body
+          }
+        }
+      `
+    }).valueChanges.pipe(map((result: any) => result.data));
+  }
+
+  getPosts(pagination: { limit: number, page: number }) {
+    return this.apollo.watchQuery({
+      query: gql`
+      query
+      {
+        posts(pagination: {limit: ${pagination.limit}, page: ${pagination.page}}) {
+          count,
+          currentPage,
+          totalPages,
+          data {
+            id,
+            title,
+            body
+          }
+        }
+      }
+      `
+    }).valueChanges.pipe(map((result: any) => result.data));
+  }
 }
 

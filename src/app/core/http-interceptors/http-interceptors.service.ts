@@ -15,6 +15,7 @@ export class HttpInterceptorsService implements HttpInterceptor {
     });
     return next.handle(req).pipe(
       tap((res) => {
+        console.error('res: ', res);
         if (res instanceof HttpResponse && res.status === 200) {
         }
       })
